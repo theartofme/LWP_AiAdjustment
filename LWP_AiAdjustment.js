@@ -432,7 +432,7 @@
 			return Object.assign({}, action, {rating: this.modifyActionRating(action)});
 		});
 		console.log("Modified action list for " + this.name(), modifiedRatingList);
-		return oldGame_Enemy_selectAllActions.call(this, actionList);
+		return oldGame_Enemy_selectAllActions.call(this, modifiedRatingList);
 	};
 
 	const oldGame_Action_targetsForOpponents = Game_Action.prototype.targetsForOpponents;
