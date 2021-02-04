@@ -2,10 +2,8 @@
 // LWP_AiAdjustment.js
 //=============================================================================
 
-// TODO: MZ compatibility
-
 /*:
- * @target MV
+ * @target MV MZ
  * @plugindesc Allows finer control over the battle actions of enemies.
  * @author Logan Pickup
  * 
@@ -164,6 +162,9 @@
 		let matchingStates = $dataStates.filter(
 			state => state != null && state.name.toLowerCase() === stateName.toLowerCase()
 		);
+		if (matchingStates.length === 0) {
+			throw new Error("Could not find state " + stateName);
+		}
 		return matchingStates[0].id;
 	}
 
@@ -200,7 +201,7 @@
 			switch (prop) {
 				case 'hp': return [actor.hp, actor.mhp];
 				case 'mp': return [actor.mp, actor.mmp];
-				case 'state': return [actor.states().map(s => s.id), undefined];
+				case 'state': let states = [actor.states().map(s => s.id), undefined]; return states;
 				default: return [actor[prop], undefined];
 			}
 		}
